@@ -3,12 +3,13 @@ import random
 from PyQt5 import uic
 from PyQt5.QtGui import QPainter, QColor
 from PyQt5.QtWidgets import QMainWindow, QApplication
+from UI import Ui_MainWindow
 
 
-class Example(QMainWindow):
+class Example(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        self.setupUi(self)
         self.do_paint = False
         self.pushButton.clicked.connect(self.paint)
 
@@ -24,9 +25,9 @@ class Example(QMainWindow):
             qp.end()
 
     def draw_elipse(self, qp):
-        qp.setBrush(QColor(255, 255, 0))
         n = random.randrange(0, 100)
         for i in range(n):
+            qp.setBrush(QColor(random.randrange(0, 256), random.randrange(0, 256), random.randrange(0, 256)))
             d = random.randrange(0, 200)
             y = random.randrange(0, 600)
             x = random.randrange(0, 800)
